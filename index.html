@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarker</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+<link rel="stylesheet" href="./css/media.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="./images/Fav-icon.png" type="image/x-icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <main>
+      <!-- Main Section -->
+      <section class="main container-fluid main-height bg-main flex-column d-flex justify-content-center align-items-center m-0 p-5">
+        
+        <!-- Main Title -->
+        <h1 class="main-heading text-center text-dark mb-5">Bookmarker</h1>
+
+        <!-- Bookmark Form -->
+        <div class="main-form section w-90 m-auto p-3 border-dotted d-flex flex-column justify-content-center align-items-center">
+          <h3 class="">
+            <i class="fa-solid fa-bookmark pe-2"></i>Bookmark your favourite sites <i class="fa fa-bookmark"></i>
+          </h3>
+
+          <!-- Site Name Input -->
+          <label for="site-name" class="form-label align-self-start mt-2 fw-bold">
+            <i class="fa-solid fa-book-bookmark pe-2"></i> Site Name
+          </label>
+          <input type="text" oninput="nameInputValidation();" class="form-control mb-2" id="site-name" placeholder="Enter Site Name" />
+
+          <!-- Site URL Input -->
+          <label for="site-url" class="form-label align-self-start mt-2 fw-bold">
+            <i class="fa-solid fa-link pe-2"></i> Site URL
+          </label>
+          <input type="text" oninput="urlInputValidation();" class="form-control mb-2" id="site-url" placeholder="Enter Site URL" />
+
+          <!-- Submit Button -->
+          <button type="submit" onclick="addBookmark()" class="btn btn-danger px-5 my-2">Submit</button>
+        </div>
+
+        <!-- Table to Display Bookmarks -->
+        <div class="main-table table-borderless table-primary w-90 m-auto p-3 mt-3">
+          <table class="table table-striped table-hover bg-light text-center table-responsive table-xs  table-sm">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>Website Name</th>
+                <th>Visit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Error Message Modal -->
+        <div id="boxLayer" class="layer w-100 main-height position-fixed top-0 start-0 d-flex justify-content-center align-items-center z-3 d-none">
+          <div class="box-conent bg-white p-4 rounded-2 shadow-lg min-width-sm min-width-xs jelly">
+            <div class="box-header w-100 d-flex justify-content-between align-items-center mb-4">
+              <div class="circles d-flex justify-content-center align-items-center">
+                <span class="rounded-circle me-2"></span>
+                <span class="rounded-circle me-2"></span>
+                <span class="rounded-circle me-2"></span>
+              </div>
+              <button class="btn border-0" id="closeBtn">
+                <i class="fa-solid fa-xmark close fs-3" onclick="closeBox()"></i>
+              </button>
+            </div>
+
+            <p class="m-0 pb-2 fs-4 fs-sm">Site Name or Url is not valid, Please follow the rules below :</p>
+            <br />
+            <ol class="rules list-unstyled m-0">
+              <li class="fs-5 fs-sm">
+                <i class="fa-regular fa-circle-right p-2 siteName-rule fs-sm"></i>Site name must contain at least 3 characters
+              </li>
+              <li class="fs-5 fs-sm">
+                <i class="fa-regular fa-circle-right p-2 siteUrl-rule fs-sm"></i>Site URL must be a valid one
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Success Message Modal -->
+        <div id="submitBoxLayer" class="layer w-100 main-height position-fixed top-0 start-0 d-flex justify-content-center align-items-center z-3 d-none">
+          <div class="box-conent bg-white p-4 rounded-2 shadow-lg min-width-sm min-width-xs  d-flex flex-column justify-content-center align-items-center wobble">
+            <div class="check-icon">
+              <i class="fa-regular fa-circle-check fa-bounce"></i>
+            </div>
+            <h3 class="m-0 pb-2 fs-1 fw-bolder text-center">Site added successfully</h3>
+            <button class="btn btn-success mt-3 w-50 rounded-2 fs-4" onclick="closeSubmitBox()">Close</button>
+          </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="DeleteBoxLayer" class="layer w-100 main-height position-fixed top-0 start-0 d-flex justify-content-center align-items-center z-3 d-none">
+          <div class="box-conent bg-white p-4 rounded-2 shadow-lg min-width-sm min-width-xs  d-flex flex-column justify-content-center align-items-cente vibration">
+            <div class="check-icon text-center my-4">
+              <i class="fa-regular fa-circle-xmark jelly "></i>
+            </div>
+            <h3 class="mb-4 pb-2 text-center fs-sm">Are you sure you want to delete this site?</h3>
+            <div class="btn-group d-flex justify-content-around align-items-center w-100">
+              <button class="btn btn-success w-25 me-4 rounded-2" onclick="closeDeleteBox()">Close</button>
+              <button class="btn btn-danger w-25 ms-4 rounded-2" onclick="confirmDelete()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- JavaScript Files -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>

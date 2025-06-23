@@ -1,0 +1,66 @@
+/* Extra small xs */
+@media screen and (min-width: 320px) and (max-width: 639px) {
+  .main-heading {
+    font-size: 2rem;
+  }
+
+  .table-xs {
+    font-size: 0.5rem !important;
+    overflow-x: auto;
+  }
+
+  .btn-sm {
+    font-size: 0.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  input {
+    font-size: 0.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .min-width-xs {
+
+  width:80%!important;
+
+  }
+
+.fs-sm {
+  font-size: 1rem !important;
+  overflow-x: auto;
+}
+}
+
+
+/* Small sm */
+@media screen and (min-width: 640px) and (max-width: 768px) {
+  .table-sm {
+    font-size: 0.6rem !important;
+    overflow-x: auto;
+  }
+
+  .btn-sm {
+    font-size: 0.6rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  label {
+    font-size: 1.1rem;
+  }
+
+  input {
+    font-size: 0.6rem;
+    padding: 0.3rem 0.6rem;
+  }
+ .min-width-sm {
+
+  width:75%!important;
+
+  }
+.fs-sm {
+  font-size: 1.25rem !important;
+  overflow-x: auto;
+}}
